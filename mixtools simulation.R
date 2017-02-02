@@ -6,6 +6,9 @@
 
 #01/02/2017
 
+#install.packages("mixtools")
+library(mixtools)
+
 m <- 2; r <- 3; n <- 300; S <- 100
 lambda <- c(0.4, 0.6)
 mu <- matrix(c(0, 0, 0, 3, 4, 5), m, r, byrow = TRUE)
