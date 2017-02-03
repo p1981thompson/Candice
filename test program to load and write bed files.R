@@ -10,15 +10,26 @@ install.packages("rtracklayer")
 library(bedr)
 library(rtracklayer)
 
-gen<-as.data.frame(matrix(NA,1000,300))
+npat<-300
+Nsnps<-700000
+Nsnps_cols<-Nsnps*2
 
-for(i in 1:300)
+gen<-matrix(NA,Nsnps_cols,npat)
+
+for(i in 1:npat)
 {
- gen[,i] <- sample(LETTERS[c(1,3,7,20)],1000,c(0.1,0.2,0.5,0.2),replace=T) 
+ gen[,i] <- sample(LETTERS[c(1,3,7,20)],Nsnps_cols,c(0.1,0.2,0.5,0.2),replace=T) 
 }
 
-import("example.txt", format="bed")
+fam_ID<-sprintf("%03d", 1:npat)
+ind_ID<-rep(1,npat)
+gender<-sample(c(1,2),npat,c(0.5,0.5),replace = T)
 
-export
+gen2<-cbind(fam_ID,ind_ID,gender,gen)
 
-write.table(gen, "gen.bed", sep = "\t")
+export(gen,"gen.bed")
+
+write.table(gen, "gen.bed")
+
+
+gen2<-import("gen.bed", format="bed")
