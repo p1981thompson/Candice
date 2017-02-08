@@ -17,9 +17,23 @@ library(psych)
 
 # Connect to redcap database
 
+library(redcapAPI)
+options(redcap_api_url = [REDcap URL]])
+
+#Need to request an API token for each project.
+
+rcon <- redcapConnection("redcap url", "token")
+
+  myProject <- redcapProjectInfo(rcon)
+  redcap.data <- exportRecords(rcon, proj=myProject)
+  #save(toyData, myProject, file="toy.Rdata")
 
 
-
+#Clean data if required
+  
+  library(car)
+  
+  recode()
 
 ################################################################################
 ################################################################################
